@@ -14,10 +14,13 @@ export default {
     name: 'Todoliste',
     mounted()
     {
-        this.load;
+        this.load();
     },
     methods:{
         ...mapActions("todo", ['load']),
+        loadData() {
+            this.load();
+        }
     },
     computed:{
         ...mapGetters("todo", ['getTodos']),
