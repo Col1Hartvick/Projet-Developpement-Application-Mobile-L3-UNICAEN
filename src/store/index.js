@@ -1,10 +1,10 @@
-import {createStore} from 'vuex'
+import { createStore } from 'vuex'
 
-import immo from './immo';
+import todo from './todo';
 
 export default createStore({
-    debug : true,
+    debug: true,
     modules: {
-        immo
-      },
-  })
+        todo
+    },
+})

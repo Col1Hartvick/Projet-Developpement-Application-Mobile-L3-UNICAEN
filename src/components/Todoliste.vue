@@ -1,5 +1,4 @@
 <template>
-    <button v-on:click="load">CHARGER</button>
     <h1>Todoliste</h1>
     <ul>
         <li v-for="todo in getTodos" v-bind:key="todo.id">
@@ -13,14 +12,15 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: 'Todoliste',
+    mounted()
+    {
+        this.load;
+    },
     methods:{
-        ...mapActions("immo", ['load']),
-        loadData() {
-            this.load();
-        }
+        ...mapActions("todo", ['load']),
     },
     computed:{
-        ...mapGetters("immo", ['getTodos']),
+        ...mapGetters("todo", ['getTodos']),
     }
 }
 </script>
