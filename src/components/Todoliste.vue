@@ -18,9 +18,6 @@ export default {
     },
     methods:{
         ...mapActions("todo", ['load']),
-        loadData() {
-            this.load();
-        }
     },
     computed:{
         ...mapGetters("todo", ['getTodos']),
