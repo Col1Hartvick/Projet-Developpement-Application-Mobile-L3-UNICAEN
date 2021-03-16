@@ -4,13 +4,17 @@ export function load({ commit }) {
     axios.get('json/todo.json')
         .then(response => {
             commit("load", response.data);
-            //console.log("a" + response.data);
         })
 }
 export function changeStatus({ commit }, id) {
     commit("changeStatus", id);
 }
-
-/*export function deleteTodo({ commit }, id) {
-    commit("deleteTodo", id);
-}*/
+export function deleteTask({ commit }, id) {
+    commit("deleteTask", id);
+}
+export function changeFilter({ commit }, filter) {
+    commit("changeFilter", filter);
+}
+export function addTodo({ commit }, name) {
+    commit("addTodo", name);
+}

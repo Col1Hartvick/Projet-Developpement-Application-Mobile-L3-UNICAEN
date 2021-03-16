@@ -1,19 +1,29 @@
 export function load(state, data) {
-    //console.log(data);
-    state.properties = data
+    state.todos = data
 }
 export function changeStatus(state, data) {
 
-    for (let i = 0; i < state.properties.length; i++) {
-        const element = state.properties[i];
+    for (let i = 0; i < state.todos.length; i++) {
+        const element = state.todos[i];
         if (element.id == data) {
 
             let newStateTodo = true;
-            state.properties[i].completed = newStateTodo;
+            state.todos[i].completed = newStateTodo;
         }
     }
 }
 
-/*export function deleteTodo(state, data) {
-
-}*/
+export function deleteTask(state, data) {
+    for (let i = 0; i < state.todos.length; i++) {
+        const element = state.todos[i];
+        if (element.id == data) {
+            state.todos = state.todos.slice(0,i).concat(state.todos.slice(i+1,state.todos.length));
+        }
+    }
+}
+export function changeFilter(state, data){
+    state.filter = data;
+}
+export function addTodo(state, data){
+    state.todos.push({id: state.todos[state.todos.length-1].id + 1, name : data, completed : false});
+}

@@ -1,15 +1,21 @@
 <template>
     <h1>Todoliste</h1>
     <ul>
-        <li v-for="todo in getTodos" v-bind:key="todo.id">
-            <p>{{todo.name}} 
-                <input v-if="todo.completed == true" type="checkbox" id="todo-status" checked >
-                <input v-else type="checkbox" id="todo-status"> 
-                <button> Modifier </button>
-                <button v-if="todo.completed == false" v-on:click="changeStatus(todo.id)"> Finie </button>
-            </p>      
+        <li v-for="todo in filteredTodos" v-bind:key="todo.id">
+            <input type="checkbox" v-model="todo.completed">
+            <input type="text" v-model="todo.name">
+            <button v-on:click="deleteTask(todo.id)">Supprimer</button>
         </li>
     </ul>
+    <div>
+        <button v-on:click="changeFilter('all')">Toutes</button>
+        <button v-on:click="changeFilter('todo')">À faire</button>
+        <button v-on:click="changeFilter('done')">Faites</button>
+    </div>
+    <div>
+        <input v-model="this.newTodo" type="text"/>
+        <button v-on:click="addTodo(this.newTodo)">Ajouter</button>
+    </div>
 </template>
 
 <script>
@@ -17,15 +23,20 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: 'Todoliste',
+    data() {
+        return{
+            newTodo: '',
+        }
+    },
     mounted()
     {
         this.load();
     },
     methods:{
-        ...mapActions("todo", ['load','changeStatus']),
+        ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo']),
     },
     computed:{
-        ...mapGetters("todo", ['getTodos']),
+        ...mapGetters("todo", ['getTodos','filteredTodos']),
     }
 }
 </script>

@@ -1,4 +1,4 @@
-# tp3_todoliste
+# Todolistes - Coyeau / Hartvick / Lecordier / Schoebela / Vaugoyeau
 
 ## Project setup
 ```

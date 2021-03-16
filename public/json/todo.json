@@ -10,7 +10,6 @@
     },
     {
         "id": 3,
-        "name": "tache 3 ",
+        "name": "tache 3",
         "completed": true
-    }
-]
+    }]
