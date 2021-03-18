@@ -1,28 +1,16 @@
 export function load(state, data) {
-    for(let i=0; i < data.length; i++){
-        if(data[i]["id"] == state.id){
-            state.todos = data[i]["todos"];
-            state.name = data[i]["name"];
-        }
-    }
+    state.data = data;
 }
-export function changeStatus(state, data) {
-
-    for (let i = 0; i < state.todos.length; i++) {
-        const element = state.todos[i];
-        if (element.id == data) {
-
-            let newStateTodo = true;
-            state.todos[i].completed = newStateTodo;
-        }
-    }
-}
-
 export function deleteTask(state, data) {
-    for (let i = 0; i < state.todos.length; i++) {
-        const element = state.todos[i];
-        if (element.id == data) {
-            state.todos = state.todos.slice(0,i).concat(state.todos.slice(i+1,state.todos.length));
+    var currentTodos = null;
+    for (let i = 0; i < state.data.length; i++){
+        if(state.data[i]["id"] == state.currentTodo){
+            currentTodos = state.data[i]["todos"];
+            for (let j = 0; j < currentTodos.length; j++) {
+                if (currentTodos[j]["id"] == data) {
+                    state.data[i]["todos"] = currentTodos.slice(0,j).concat(currentTodos.slice(j+1,currentTodos.length));
+                }
+            }
         }
     }
 }
@@ -30,7 +18,12 @@ export function changeFilter(state, data){
     state.filter = data;
 }
 export function addTodo(state, data){
-    state.todos.push({id: state.todos[state.todos.length-1].id + 1, name : data, completed : false});
-    var fs = require('fs');
-    fs.writeFile('myjsonfile.json', JSON.stringify(state.todos), 'utf8');
+    for (let i = 0; i < state.data.length; i++){
+        if(state.data[i]["id"] == state.currentTodo){
+            state.data[i]["todos"].push({id: state.data[i]["todos"][state.data[i]["todos"].length-1].id + 1, name : data, completed : false});
+        }
+    }
+}
+export function changeCurrentTodolist(state, data){
+    state.currentTodo = data;
 }

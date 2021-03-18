@@ -33,7 +33,7 @@ export default {
         this.load();
     },
     methods:{
-        ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo']),
+        ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo','changeCurrentTodolist']),
     },
     computed:{
         ...mapGetters("todo", ['getTodos','filteredTodos','getName']),

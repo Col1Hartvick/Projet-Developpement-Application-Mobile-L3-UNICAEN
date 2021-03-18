@@ -1,8 +1,7 @@
 export default function () {
     return {
-        id: 2,
-        name : "",
-        todos: null,
+        data : null,
+        currentTodo: 1,
         filter : 'all',
     }
 }

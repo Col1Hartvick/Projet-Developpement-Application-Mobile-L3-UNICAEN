@@ -18,3 +18,6 @@ export function changeFilter({ commit }, filter) {
 export function addTodo({ commit }, name) {
     commit("addTodo", name);    
 }
+export function changeCurrentTodolist({ commit }, id) {
+    commit("changeCurrentTodolist", id);    
+}
