@@ -16,5 +16,5 @@ export function changeFilter({ commit }, filter) {
     commit("changeFilter", filter);
 }
 export function addTodo({ commit }, name) {
-    commit("addTodo", name);
+    commit("addTodo", name);    
 }

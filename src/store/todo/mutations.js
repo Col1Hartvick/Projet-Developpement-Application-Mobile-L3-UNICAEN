@@ -1,5 +1,10 @@
 export function load(state, data) {
-    state.todos = data
+    for(let i=0; i < data.length; i++){
+        if(data[i]["id"] == state.id){
+            state.todos = data[i]["todos"];
+            state.name = data[i]["name"];
+        }
+    }
 }
 export function changeStatus(state, data) {
 
@@ -26,4 +31,6 @@ export function changeFilter(state, data){
 }
 export function addTodo(state, data){
     state.todos.push({id: state.todos[state.todos.length-1].id + 1, name : data, completed : false});
+    var fs = require('fs');
+    fs.writeFile('myjsonfile.json', JSON.stringify(state.todos), 'utf8');
 }

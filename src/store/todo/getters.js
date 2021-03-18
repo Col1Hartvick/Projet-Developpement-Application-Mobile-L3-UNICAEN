@@ -11,3 +11,7 @@ export function filteredTodos(state){
     }
     return state.todos;
 }
+
+export function getName(state){
+    return state.name;
+}

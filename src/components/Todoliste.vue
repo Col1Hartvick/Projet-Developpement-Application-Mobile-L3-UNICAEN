@@ -1,5 +1,5 @@
 <template>
-    <h1>Todoliste</h1>
+    <input type="text" v-model="getName">
     <ul>
         <li v-for="todo in filteredTodos" v-bind:key="todo.id">
             <input type="checkbox" v-model="todo.completed">
@@ -36,7 +36,7 @@ export default {
         ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo']),
     },
     computed:{
-        ...mapGetters("todo", ['getTodos','filteredTodos']),
+        ...mapGetters("todo", ['getTodos','filteredTodos','getName']),
     }
 }
 </script>
