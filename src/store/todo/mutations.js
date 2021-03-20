@@ -27,3 +27,7 @@ export function addTodo(state, data){
 export function changeCurrentTodolist(state, data){
     state.currentTodo = data;
 }
+
+export function addUser(state, data){
+    state.userName = data
+}

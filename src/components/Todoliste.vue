@@ -1,4 +1,6 @@
 <template>
+    {{this.getuserName}}
+    <br/>
     <input type="text" v-model="getName">
     <ul>
         <li v-for="todo in filteredTodos" v-bind:key="todo.id">
@@ -36,7 +38,7 @@ export default {
         ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo','changeCurrentTodolist']),
     },
     computed:{
-        ...mapGetters("todo", ['getTodos','filteredTodos','getName']),
+        ...mapGetters("todo", ['getTodos','filteredTodos','getName','getuserName']),
     }
 }
 </script>

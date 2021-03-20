@@ -3,5 +3,6 @@ export default function () {
         data : null,
         currentTodo: 1,
         filter : 'all',
+        userName: ""
     }
 }

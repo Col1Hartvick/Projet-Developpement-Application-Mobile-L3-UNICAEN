@@ -29,3 +29,12 @@ export function getName(state){
 export function getTodolists(state){
     return state.data;
 }
+
+export function getuserName(state){
+    if(state.userName == ""){
+        return "Vous n'êtes pas connecter"
+    }
+    else{
+        return "Bienvenue " + state.userName
+    }
+    }

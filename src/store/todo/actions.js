@@ -21,3 +21,7 @@ export function addTodo({ commit }, name) {
 export function changeCurrentTodolist({ commit }, id) {
     commit("changeCurrentTodolist", id);    
 }
+
+export function addUser({commit}, userName){
+    commit("addUser",userName);
+}
