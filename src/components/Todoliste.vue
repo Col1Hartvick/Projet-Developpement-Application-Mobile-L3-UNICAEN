@@ -9,6 +9,9 @@
             <button v-on:click="deleteTask(todo.id)">Supprimer</button>
         </li>
     </ul>
+
+    <p> il reste {{countTodo}} à faire pour cette liste </p>
+    <p> il reste {{countTodoTotal}} à faire pour au total </p>
     <div>
         <button v-on:click="changeFilter('all')">Toutes</button>
         <button v-on:click="changeFilter('todo')">À faire</button>
@@ -38,7 +41,7 @@ export default {
         ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo','changeCurrentTodolist']),
     },
     computed:{
-        ...mapGetters("todo", ['getTodos','filteredTodos','getName','getuserName']),
+        ...mapGetters("todo", ['getTodos','filteredTodos','getName','getuserName','countTodo','countTodoTotal']),
     }
 }
 </script>

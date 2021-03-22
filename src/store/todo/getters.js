@@ -32,9 +32,39 @@ export function getTodolists(state){
 
 export function getuserName(state){
     if(state.userName == ""){
-        return "Vous n'êtes pas connecter"
+        return ("Vous n'êtes pas connecter");
     }
     else{
-        return "Bienvenue " + state.userName
+        return ("Bienvenue " + state.userName);
     }
+}
+
+export function countTodo(state){
+    if(state.data != null){
+    let cpt = 0;
+    for (let i = 0;i < state.data.length; i++) {
+        for (let j = 0; j < state.data[i]['todos'].length; j++) {
+            if (state.data[i]["id"] == state.currentTodo) {
+                if (state.data[i]['todos'][j]['completed'] == false) {
+                    cpt ++;
+                }
+            }
+        }
     }
+    return cpt;
+}
+}
+
+export function countTodoTotal(state){
+    if(state.data != null){
+    let cpt = 0;
+    for (let i = 0; i < state.data.length; i++) {
+        for (let j = 0; j < state.data[i]['todos'].length; j++) {
+            if (state.data[i]['todos'][j]['completed'] == false) {
+                cpt ++;
+            }
+        }
+    }
+    return cpt;
+}
+}
