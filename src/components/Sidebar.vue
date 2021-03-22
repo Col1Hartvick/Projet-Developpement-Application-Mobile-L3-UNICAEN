@@ -1,9 +1,14 @@
 <template>
+    <h2>Hello {{getUserName}}</h2>
     <ul>
         <li v-for="todolist in getTodolists" v-bind:key="todolist.id">
-            <button v-on:click="changeCurrentTodolist(todolist.id)">{{todolist.name}}</button>
+            <a href="javascript:;" v-on:click="changeCurrentTodolist(todolist.id)">{{todolist.name}}</a> <button v-on:click="deleteTodoList(todolist.id)">x</button>
         </li>
     </ul>
+    <div>
+        <input v-model="newTodosList" type="text"/>
+        <button v-on:click="addTodoList(this.newTodosList),resetNewTodoList()">Add todoslist</button>
+    </div>
 </template>
 
 <script>
@@ -11,15 +16,29 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
     name: 'Sidebar',
+    data() {
+        return{
+            newTodosList: '',
+        }
+    },
     mounted()
     {
-        this.load();
+        if(this.getId == ""){
+            this.$router.push('/');
+            return;
+        }
+        this.getUser(this.getId['token'])
+        this.load(this.getId['token']);
     },
     methods:{
-        ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo', 'changeCurrentTodolist']),
+        ...mapActions("todo", ['changeCurrentTodolist', 'deleteTodoList', 'addTodoList', 'getUser','load']),
+        resetNewTodoList(){
+            this.newTodosList = '';
+        }
     },
     computed:{
-        ...mapGetters("todo", ['getTodos','filteredTodos','getName', 'getTodolists']),
+        ...mapGetters("todo", ['getUserName', 'getTodolists']),
+        ...mapGetters("account", ['getId']),
     }
 }
 </script>

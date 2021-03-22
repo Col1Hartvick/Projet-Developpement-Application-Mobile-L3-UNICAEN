@@ -16,27 +16,26 @@ export function filteredTodos(state){
     return currentTodos;
 }
 
-export function getName(state){
+export function getTodoName(state){
     if(state.data != null){
         for (let i = 0; i < state.data.length; i++){
             if(state.data[i]["id"] == state.currentTodo){
-                return state.data[i]["name"];
+                return state.data[i].name;
             }
         }
     }
+}
+
+export function getCurrentTodo(state){
+    return state.currentTodo;
 }
 
 export function getTodolists(state){
     return state.data;
 }
 
-export function getuserName(state){
-    if(state.userName == ""){
-        return ("Vous n'êtes pas connecter");
-    }
-    else{
-        return ("Bienvenue " + state.userName);
-    }
+export function getUserName(state){
+    return state.userName;
 }
 
 export function countTodo(state){

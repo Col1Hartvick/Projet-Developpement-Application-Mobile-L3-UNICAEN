@@ -1,25 +1,24 @@
 <template>
-    {{this.getuserName}}
     <br/>
-    <input type="text" v-model="getName">
+    <h2>{{this.getTodoName}}</h2>
     <ul>
         <li v-for="todo in filteredTodos" v-bind:key="todo.id">
-            <input type="checkbox" v-model="todo.completed">
-            <input type="text" v-model="todo.name">
-            <button v-on:click="deleteTask(todo.id)">Supprimer</button>
+            <input @change="modifyTodo($event, todo.id)" type="checkbox" v-model="todo.completed">
+            <input @input="modifyTodo($event, todo.id)" type="text" v-model="todo.name">
+            <button v-on:click="deleteTask(todo.id)">x</button>
         </li>
     </ul>
 
-    <p> il reste {{countTodo}} à faire pour cette liste </p>
-    <p> il reste {{countTodoTotal}} à faire pour au total </p>
+    <p> {{countTodo}} remaining for this todo </p>
+    <p> {{countTodoTotal}} remaining in all</p>
     <div>
-        <button v-on:click="changeFilter('all')">Toutes</button>
-        <button v-on:click="changeFilter('todo')">À faire</button>
-        <button v-on:click="changeFilter('done')">Faites</button>
+        <button v-on:click="changeFilter('all')">All</button>
+        <button v-on:click="changeFilter('todo')">To do</button>
+        <button v-on:click="changeFilter('done')">Done</button>
     </div>
     <div>
         <input v-model="this.newTodo" type="text"/>
-        <button v-on:click="addTodo(this.newTodo)">Ajouter</button>
+        <button v-on:click="addTodo([this.newTodo, this.getCurrentTodo])">Add todo</button>
     </div>
 </template>
 
@@ -33,18 +32,30 @@ export default {
             newTodo: '',
         }
     },
-    mounted()
-    {
-        this.load();
-    },
     methods:{
-        ...mapActions("todo", ['load','changeStatus','deleteTask','changeFilter','addTodo','changeCurrentTodolist']),
+        ...mapActions("todo", ['modifyTodo2','deleteTask','changeFilter','addTodo','changeCurrentTodolist']),
+        modifyTodo($event, idTodo){
+            let completed = "";
+            let name = "";
+            if($event.target.type == "checkbox"){
+                completed = $event.target.checked;
+                name = $event.target.nextSibling.value;
+            }
+            else{
+                completed = $event.target.previousSibling.checked;
+                name = $event.target.value;
+            }
+            if(completed){completed = 0;}
+            else{completed = 1;}
+            this.modifyTodo2([idTodo, name, completed, this.getCurrentTodo]);
+        }
     },
     computed:{
-        ...mapGetters("todo", ['getTodos','filteredTodos','getName','getuserName','countTodo','countTodoTotal']),
+        ...mapGetters("todo", ['getCurrentTodo','getUserName','getTodos','filteredTodos','getTodoName','countTodo','countTodoTotal']),
     }
 }
 </script>
 
 <style>
+li {list-style: none;}
 </style>
